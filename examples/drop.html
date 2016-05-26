@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Drag Example</title>
+    <title>Drop Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
       [draggable]{
@@ -32,17 +32,21 @@
 <body>
 
   <l-view name="dragDemo">
-    <div draggable='{"clone":true}'>Clone Me</div>
-    <div draggable>Drag Me</div>
+    <div draggable='{"clone":true}' id="clonable">Clone Me</div>
+    <div draggable id="dragable">Drag Me</div>
   </l-view>
 
-  <div l-view="dropZone" class="dropZone">Drop Here</div>
+  <div l-view="dropZone" class="dropZone" droppable="viewMethod.dropped">Drop Here</div>
 
   <script type="text/javascript" src="../../../build/lapiz.js"></script>
   <script type="text/javascript" src="../../../build/template.js"></script>
   <script type="text/javascript" src="../../../build/ui.js"></script>
   <script type="text/javascript" src="../dragDrop.js"></script>
   <script type="text/javascript">
+    Lapiz.UI.mediator.viewMethod(function dropped(vmNode, vmCtx, dragNode, dropNode, dragCtx, dropCtx){
+      console.log("Dropped!");
+      console.log(dragNode.id);
+    })
     Lapiz.UI.render("dragDemo >> body");
     Lapiz.UI.render("dropZone >> body");
   </script>
